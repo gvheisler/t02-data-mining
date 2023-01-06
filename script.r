@@ -1,5 +1,5 @@
-#ds <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
-ds <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\saudeRS_2022.csv', sep = ';')
+ds <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
+#ds <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\saudeRS_2022.csv', sep = ';')
 
 obitos <- ds[which(ds$EVOLUCAO=='OBITO'),]
 
@@ -16,16 +16,10 @@ colnames(obitosPorDia) <- c('dia', 'obitos')
 
 obitosPorDia$dia <- unique(obitos$DATA_EVOLUCAO)
 
-contador <- 0
+
 for(i in 1:nrow(obitosPorDia)){
-  for (j in 1:nrow(obitos)) {
-    if(obitos[j,]$DATA_EVOLUCAO==obitosPorDia[i,]$dia){
-      contador <- contador + 1
-    }
-  }
-  obitosPorDia[i,2] <- contador
-  contador <- 0
-  #obitosPorDia[which(obitosPorDia$dia==data),] <- sum(obitos[which(obitos$DATA_EVOLUCAO==data),])
+  dsAux <- obitos[which(obitos$DATA_EVOLUCAO==obitosPorDia[i,1]), ]
+  obitosPorDia[i,2] <- nrow(dsAux)
 }
 
 plot(obitosPorDia, type = 'l')
