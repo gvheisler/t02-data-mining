@@ -6,4 +6,26 @@ obitos <- ds[which(ds$EVOLUCAO=='OBITO'),]
 nds <- ds[,-c(1:4, 7:9, 11, 21:30)]
 obitos <- obitos[,-c(1:4, 7:10, 21:30)]
 
-obitos <- obitos[sort(obitos$DATA_EVOLUCAO),]
+obitos$DATA_EVOLUCAO <- as.Date(obitos$DATA_EVOLUCAO, format = "%d/%m/%y")
+
+obitos <- obitos[order(obitos$DATA_EVOLUCAO),]
+
+obitosPorDia <- data.frame(matrix(nrow = length(unique(obitos$DATA_EVOLUCAO)), ncol = 2))
+
+colnames(obitosPorDia) <- c('dia', 'obitos')
+
+obitosPorDia$dia <- unique(obitos$DATA_EVOLUCAO)
+
+contador <- 0
+for(i in 1:nrow(obitosPorDia)){
+  for (j in 1:nrow(obitos)) {
+    if(obitos[j,]$DATA_EVOLUCAO==obitosPorDia[i,]$dia){
+      contador <- contador + 1
+    }
+  }
+  obitosPorDia[i,2] <- contador
+  contador <- 0
+  #obitosPorDia[which(obitosPorDia$dia==data),] <- sum(obitos[which(obitos$DATA_EVOLUCAO==data),])
+}
+
+plot(obitosPorDia, type = 'l')
