@@ -28,7 +28,8 @@ for (i in 1:nrow(casosDia)) {
 qplot(
   x = casosDia$dia,
   y = casosDia$casos,
-  geom = c("line")
+  geom = c("smooth"),
+  ylab = "Quantidade de casos",
+  xlab = "Data",
+  main = "Casos de COVID-19 no Rio Grande do Sul"
 )
-
-plot(casosDia, type = 'l')

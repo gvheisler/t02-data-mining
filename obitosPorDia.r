@@ -28,7 +28,8 @@ for (i in 1:nrow(obitosDia)){
 qplot(
   x = obitosDia$dia,
   y = obitosDia$casos,
-  geom = c("smooth")
+  geom = c("line","smooth"),
+  xlab = 'Data',
+  ylab = "Óbitos",
+  main = "Óbitos por COVID-19 no Rio Grande do Sul"
 )
-
-plot(obitosDia, type = 'l')
