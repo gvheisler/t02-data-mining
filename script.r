@@ -1,12 +1,14 @@
 ds <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
 #ds <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\saudeRS_2022.csv', sep = ';')
 
+ds2022 <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\20230106_Ano2022.csv', sep = ';')
+
 obitos <- ds[which(ds$EVOLUCAO=='OBITO'),]
 
 nds <- ds[,-c(1:4, 7, 9:11, 21:30)]
 obitos <- obitos[,-c(1:4, 7:10, 21:30)]
 
-obitos$DATA_EVOLUCAO <- as.Date(obitos$DATA_EVOLUCAO, format = "%d/%m/%y")
+obitos$DATA_EVOLUCAO <- as.Date(obitos$DATA_EVOLUCAO, format = "%d/%m/%Y")
 nds$DATA_CONFIRMACAO <- as.Date(nds$DATA_CONFIRMACAO, format = "%d/%m/%y")
 
 obitos <- obitos[order(obitos$DATA_EVOLUCAO),]
@@ -34,7 +36,10 @@ for(i in 1:nrow(obitosPorDia)){
   casosPorDia[i,2] <- nrow(dsAux)
 }
 
+sum(casosPorDia$casos)
+
 plot(casosPorDia, type = 'l')
-casosPorDia[250,2] <- 0
-obitosPorDia[300,2] <- 2500
 lines(obitosPorDia, col = 'red')
+
+barplot(prop.table(table(ds$SEXO)))
+barplot(prop.table(table(obitos$SEXO)))
