@@ -1,7 +1,11 @@
-ds <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
+library(ggplot2)
+
+dsLido <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
 #ds <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\saudeRS_2022.csv', sep = ';')
 
 ds2022 <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\20230106_Ano2022.csv', sep = ';')
+
+ds <- dsLido
 
 obitos <- ds[which(ds$EVOLUCAO=='OBITO'),]
 
@@ -9,7 +13,7 @@ nds <- ds[,-c(1:4, 7, 9:11, 21:30)]
 obitos <- obitos[,-c(1:4, 7:10, 21:30)]
 
 obitos$DATA_EVOLUCAO <- as.Date(obitos$DATA_EVOLUCAO, format = "%d/%m/%Y")
-nds$DATA_CONFIRMACAO <- as.Date(nds$DATA_CONFIRMACAO, format = "%d/%m/%y")
+nds$DATA_CONFIRMACAO <- as.Date(nds$DATA_CONFIRMACAO, format = "%d/%m/%Y")
 
 obitos <- obitos[order(obitos$DATA_EVOLUCAO),]
 nds <- nds[order(nds$DATA_CONFIRMACAO),]
@@ -31,15 +35,17 @@ colnames(casosPorDia) <- c('dia', 'casos')
 
 casosPorDia$dia <- unique(nds$DATA_CONFIRMACAO)
 
-for(i in 1:nrow(obitosPorDia)){
-  dsAux <- nds[which(nds$DATA_CONFIRMACAO==obitosPorDia[i,1]), ]
+i<-2
+
+for(i in 1:nrow(casosPorDia)){
+  dsAux <- nds[which(nds$DATA_CONFIRMACAO==casosPorDia[i,1]), ]
   casosPorDia[i,2] <- nrow(dsAux)
 }
 
-sum(casosPorDia$casos)
-
 plot(casosPorDia, type = 'l')
 lines(obitosPorDia, col = 'red')
+plot(obitosPorDia, type = 'l')
 
-barplot(prop.table(table(ds$SEXO)))
-barplot(prop.table(table(obitos$SEXO)))
+sum(casosPorDia$casos)
+
+qplot(x = obitosPorDia$dia, y = obitosPorDia$obitos, geom = c('line'))
