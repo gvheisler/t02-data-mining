@@ -1,10 +1,5 @@
 library(ggplot2)
-
-dsLido <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
-#ds <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\saudeRS_2022.csv', sep = ';')
-
-ds2022 <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\20230106_Ano2022.csv', sep = ';')
-
+dsLido <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\completo.csv', sep = ';')
 ds <- dsLido
 
 obitos <- ds[which(ds$EVOLUCAO=='OBITO'),]
@@ -44,6 +39,7 @@ for(i in 1:nrow(casosPorDia)){
 
 plot(casosPorDia, type = 'l')
 lines(obitosPorDia, col = 'red')
+
 plot(obitosPorDia, type = 'l')
 
 sum(casosPorDia$casos)
