@@ -59,3 +59,12 @@ qplot(
   y = obitosDia$obitos,
   geom = c("line")
 )
+
+casosObitosDia <- cbind(casosDia, obitosDia$obitos)
+colnames(casosObitosDia) <- c('data', 'quant_casos', 'quant_obitos')
+
+write.csv2(casosObitosDia, "C:\\Users\\gvheisler\\Desktop\\data-mining\\t02-data-mining\\ds\\casosObitosDia.csv", row.names = FALSE, col.names = TRUE)
+
+plot(x = casosObitosDia$data, y = casosObitosDia$quant_casos, type = 'l')
+
+lines(x = casosObitosDia$data, y = casosObitosDia$quant_obitos, col = 'blue')
