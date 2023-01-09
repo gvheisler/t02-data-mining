@@ -1,6 +1,7 @@
 library(ggplot2)
 
-completo <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\completo.csv', sep = ';')
+#completo <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\completo.csv', sep = ';')
+completo <- read.csv('C:\\Users\\gvheisler\\Desktop\\data-mining\\completo.csv', sep = ';')
 
 ds <- completo
 
@@ -28,7 +29,7 @@ for (i in 1:nrow(casosDia)) {
 qplot(
   x = casosDia$dia,
   y = casosDia$casos,
-  geom = c("smooth"),
+  geom = c("line", "smooth"),
   ylab = "Quantidade de casos",
   xlab = "Data",
   main = "Casos de COVID-19 no Rio Grande do Sul"
