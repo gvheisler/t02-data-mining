@@ -1,35 +1,39 @@
 library(arules)
 
-+dsLido <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
+#dsLido <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
+completo <- read.csv2('C:\\Users\\gvheisler\\Desktop\\data-mining\\completo.csv')
 
-ds <- dsLido
+ds <- completo
 
-ds <- ds[,-c(1:4, 7:11, 20:30)]
+ds <- ds[,-c(1:4, 6:11, 20:26, 28:30)]
 ds <- ds[-which(ds$EVOLUCAO!='OBITO'&ds$EVOLUCAO!='RECUPERADO'),]
 
-#operador ternário eca
-ds$CONDICOES <- nchar(ds$CONDICOES) > 0 ? ds$CONDICOES <- 1 : ds$CONDICOES <- 0
+ds$CONDICOES <- ifelse(nchar(ds$CONDICOES) > 0, 1, 0)
 
-for(i in 4:9){
-  ds[,i] <- ifelse(ds[,i]=='SIM', TRUE, FALSE)
+for(i in c(3:8, 10)){
+  ds[,i] <- ifelse(ds[,i]=='SIM', 1, 0)
 }
+
+
+ds$EVOLUCAO <- ifelse(ds$EVOLUCAO=='OBITO', 1, 0)
+
+ds$SEXO <- ifelse(ds$SEXO=='Masculino', 1, 0)
+
 
 for (i in 1:ncol(ds)) {
   ds[,i] <- as.factor(ds[,i])
 }
 
-levels(ds$EVOLUCAO)
+# 1 - SIM, 0 - NAO
+# 1 - Masculino, 0 - Feminino
+# 1 - OBITO, 2 - RECUPERADO
 
-dsObito <- ds[which(ds$EVOLUCAO=='OBITO'),]
+regras <- apriori(data = ds, parameter = list(conf = 0.1, supp = 0.1), target = 'rules', minlen = 4)
 
-dsObito$EVOLUCAO <- as.factor(dsObito$EVOLUCAO)
-
-levels(dsObito$EVOLUCAO)
-
-regras <- apriori(data = dsObito, parameter = list(conf = 0.5, supp = 0.5), target = 'rules', minlen = 4)
-
-regrasObito <- subset(regras, rhs %in% 'EVOLUCAO=OBITO')
+regrasObito <- subset(regras, rhs %in% 'EVOLUCAO=1')
 
 regrasObito <- sort(regrasObito, by = 'support', decreasing = TRUE)
 
+inspect(regras)
 inspect(regrasObito)
+
