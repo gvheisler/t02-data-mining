@@ -1,11 +1,11 @@
 library(arules)
 
-#dsLido <- read.csv('C:\\Users\\gvhei\\Desktop\\projetos\\saudeRS_2022.csv', sep = ';')
 completo <- read.csv2('C:\\Users\\gvheisler\\Desktop\\data-mining\\completo.csv')
 
 ds <- completo
 
-ds <- ds[,-c(1:4, 6:11, 13, 20:26, 28:30)]
+#ds <- ds[,-c(1:4, 6:11, 13, 20:26, 28:30)]
+ds <- ds[,c(12, 14:18)]
 #ds <- ds[-which(ds$EVOLUCAO!='OBITO'&ds$EVOLUCAO!='RECUPERADO'),]
 ds <- ds[-which(ds$EVOLUCAO!='OBITO'),]
 
@@ -29,9 +29,9 @@ for (i in 1:ncol(ds)) {
 # 1 - Masculino, 0 - Feminino
 # 1 - OBITO, 0 - RECUPERADO
 
-regras <- apriori(data = ds, parameter = list(conf = 0.5, supp = 0.5), target = 'rules', minlen = 5)
+regras <- apriori(data = ds, parameter = list(conf = 0.2, supp = 0.2), target = 'rules', minlen = 5)
 
-regrasObito <- subset(regras, rhs %in% 'EVOLUCAO=1')
+regrasObito <- subset(regras, rhs %in% 'EVOLUCAO=OBITO')
 
 regrasObito <- sort(regrasObito, by = 'support', decreasing = TRUE)
 

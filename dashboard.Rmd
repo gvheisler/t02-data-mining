@@ -16,6 +16,8 @@ library(flexdashboard)
 
 ```{r}
 
+plot(sample(20))
+
 ```
 
 ## Column {data-width="350"}
@@ -23,11 +25,12 @@ library(flexdashboard)
 ### Chart B
 
 ```{r}
+plot(sample(200))
 
 ```
 
 ### Chart C
 
 ```{r}
-
+plot(sample(2000))
 ```
