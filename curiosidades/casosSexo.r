@@ -23,9 +23,17 @@ for (tipo in t) {
   }
 }
 
-pie(nds$quantidade[c(1:2)])
-pie(nds$quantidade[c(3:4)])
+barplot(
+  nds[which(nds$tipo=='RECUPERADO'),2], 
+  col = 'darkblue', 
+  names.arg = nds[which(nds$tipo=='RECUPERADO'),1],
+  main = "Casos por sexo"
+)
 
-ggplot(nds, aes(x="", y=quantidade, fill=sexo)) +
-  geom_bar(stat="identity", width=1) +
-  coord_polar("y", start=0)
+barplot(
+  nds[which(nds$tipo=='OBITO'),2], 
+  col = 'darkred', 
+  names.arg = nds[which(nds$tipo=='RECUPERADO'),1],
+  main = "Óbitos por sexo"
+)
+

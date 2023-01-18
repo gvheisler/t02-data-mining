@@ -15,21 +15,12 @@ dsRecuperados <- dsRecuperados[sample(nrow(dsObitos)),]
 
 ds <- rbind(dsRecuperados, dsObitos)
 
-
-ds$CONDICOES <- ifelse(nchar(ds$CONDICOES) > 0, 1, 0)
-
-for(i in c(4:9, 11)){
-  ds[,i] <- ifelse(ds[,i]=='SIM', 1, 0)
-}
-
-ds <- ds[,-c(4,11)]
-
-ds <- ds[,-2]
-
 for (i in 1:ncol(ds)) {
   ds[,i] <- as.factor(ds[,i])
 }
+?rpart
+ds <- ds[,-5]
 
-tree <- rpart(formula = EVOLUCAO ~ .,data = ds, method = "class", cp = 0.5)
+tree <- rpart(formula = EVOLUCAO ~ .,data = ds, method = "class", cp = 0.001)
 
-rpart.plot(tree,  type = 0, clip.right.labs = FALSE, under = TRUE)
+rpart.plot(tree, type = 3, clip.right.labs = FALSE, under = FALSE)

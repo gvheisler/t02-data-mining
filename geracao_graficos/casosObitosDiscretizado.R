@@ -13,10 +13,9 @@ for (j in 2:3) {
   }
 }
 
-ds <- ds[-which(ds$data<as.Date('2022-01-01', format = "%Y-%m-%d")),]
+#ds <- ds[-which(ds$data<as.Date('2022-01-01', format = "%Y-%m-%d")),]
 #ds <- ds[-which(ds$data>as.Date('2022-01-01', format = "%Y-%m-%d")),]
 
-plot(x = ds$data, y = ds$quant_casos, col = 'blue', type = 'l', lwd = 2, bg = 'black', pch = 20)
+plot(x = ds$data, y = ds$quant_casos, col = 'blue', type = 'l', lwd = 1, bg = 'black', pch = 20, xlab = 'Data', ylab = '')
 lines(x = ds$data, y = ds$quant_obitos, col = 'red', lwd = 2)
 
-?barplot(x = ds$data, y = ds$quant_casos)

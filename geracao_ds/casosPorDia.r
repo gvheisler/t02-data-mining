@@ -26,6 +26,8 @@ for (i in 1:nrow(casosDia)) {
   casosDia[i,2] <- nrow(dfAux)
 }
 
+plot(x = casosDia$dia, y = casosDia$casos, type = 'l', xlab = 'Data', ylab = 'Quantidade de casos')
+
 qplot(
   x = casosDia$dia,
   y = casosDia$casos,

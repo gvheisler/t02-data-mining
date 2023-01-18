@@ -20,16 +20,21 @@ colnames(obitosDia) <- c('dia', 'casos')
 
 obitosDia$dia <- dias
 
+
+
 for (i in 1:nrow(obitosDia)){
   dfAux <- ds[which(ds$DATA_EVOLUCAO==obitosDia[i,1]),]
   obitosDia[i,2] <- nrow(dfAux)
 }
+
+plot(x = obitosDia$dia, y = obitosDia$casos, type = 'l',
+     xlab = 'Data', ylab = 'Quantidade de ??bitos', col = 'red')
 
 qplot(
   x = obitosDia$dia,
   y = obitosDia$casos,
   geom = c("line","smooth"),
   xlab = 'Data',
-  ylab = "Óbitos",
-  main = "Óbitos por COVID-19 no Rio Grande do Sul"
+  ylab = "Cbitos",
+  main = "C=bitos por COVID-19 no Rio Grande do Sul"
 )
