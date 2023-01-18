@@ -60,3 +60,17 @@ inspect(regras)
 | {TOSSE=NAO, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.2364816 |
 | {FEBRE=SIM, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.2323961 |
 | {FEBRE=SIM, TOSSE=SIM, DISPNEIA=SIM, OUTROS=NAO}    | => | {EVOLUCAO=OBITO} | 0.2142033 |
+------------------------------------------------------
+```R
+regras <- apriori(data = ds, parameter = list(conf = 0.05, supp = 0.05), target = 'rules', minlen = 6, maxlen = 6)
+regras <- subset(regras, rhs %in% 'EVOLUCAO=OBITO')
+regras <- sort(regras, by = 'support', decreasing = TRUE)
+inspect(regras)
+```
+| lhs                                                            | => | rhs              | support    |
+|----------------------------------------------------------------|----|------------------|------------|
+| {FEBRE=NAO, TOSSE=NAO, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.16037010 |
+| {FEBRE=SIM, TOSSE=SIM, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.15628455 |
+| {FEBRE=NAO, TOSSE=SIM, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.13898101 |
+| {FEBRE=SIM, TOSSE=NAO, GARGANTA=NAO, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.07611151 |
+| {FEBRE=SIM, TOSSE=SIM, GARGANTA=SIM, DISPNEIA=SIM, OUTROS=NAO} | => | {EVOLUCAO=OBITO} | 0.05791877 |
