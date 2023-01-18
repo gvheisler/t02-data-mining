@@ -8,8 +8,6 @@ ds <- ds[,c(12, 14:18)]
 ds <- ds[-which(ds$EVOLUCAO!='OBITO'),]
 
 
-
-
 for (i in 1:ncol(ds)) {
   ds[,i] <- as.factor(ds[,i])
 }
@@ -17,8 +15,6 @@ for (i in 1:ncol(ds)) {
 regras <- apriori(data = ds, parameter = list(conf = 0.3, supp = 0.3), target = 'rules', minlen = 4)
 
 regras <- subset(regras, rhs %in% 'EVOLUCAO=OBITO')
-
-regrasObito <- sort(regrasObito, by = 'confidence', decreasing = TRUE)
 
 regras <- sort(regras, by = 'support', decreasing = TRUE)
 inspect(regras)

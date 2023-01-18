@@ -18,7 +18,7 @@ ds <- rbind(dsRecuperados, dsObitos)
 for (i in 1:ncol(ds)) {
   ds[,i] <- as.factor(ds[,i])
 }
-?rpart
+
 ds <- ds[,-5]
 
 tree <- rpart(formula = EVOLUCAO ~ .,data = ds, method = "class", cp = 0.001)
