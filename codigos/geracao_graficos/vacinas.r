@@ -26,9 +26,9 @@ obitos <- obitos[,-2]
 for (i in 1:nrow(obitos)) {
   obitos[i,2] <- ((obitos[i,2] - min(obitos[,2]))/max(obitos[,2]) - min(obitos[,2]))*100
 }
-plot(x = obitos$data, y = obitos$quant_obitos, type = 'l', col = 'darkred', ylab = 'Óbitos e vacinados', xlab = 'Data', main = 'Gráfico normalizado de óbitos\n em comparação com as vacinas')
+plot(x = obitos$data, y = obitos$quant_obitos, lwd = 2, type = 'l', col = 'darkred', ylab = 'Óbitos e vacinados', xlab = 'Data', main = 'Gráfico normalizado de óbitos\n em comparação com as vacinas')
 lines(x = vacinas$Data, y = vacinas$porcentagem1, col = 'darkgreen', lwd = 3)
 lines(x = vacinas$Data, y = vacinas$porcentagem2, col = 'darkblue', lwd = 3)
 
 legend('topleft', legend=c("Óbitos normalizados", "1ª dose", "2ª dose"),
-       col=c("darkred", "darkgreen", "darkblue"), lty = 1, lwd = c(1,3,3), cex = 0.5)
+       col=c("darkred", "darkgreen", "darkblue"), lty = 1, lwd = c(2,3,3), cex = 0.5)

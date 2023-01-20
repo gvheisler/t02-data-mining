@@ -6,6 +6,14 @@ ds$data <- as.Date(ds$data, format = "%Y-%m-%d")
 
 plot(x = ds$data, y = ds$quant_obitos, type = 'l')
 
+plot(x = ds$data, y = ds$quant_obitos, type = 'l',
+     col = 'red',
+     xlab = "Data", ylab = "Quantidade de casos", 
+     main = "Casos de COVID-19 por dia no RS",
+     lty = 1,
+     lwd = 2
+)
+
 qplot(
   x = ds$data,
   y = ds$quant_obitos,
