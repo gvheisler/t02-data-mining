@@ -14,8 +14,12 @@ ndsa <- nds[order(nds$casos, decreasing = TRUE),]
 
 barplot(ndsa$casos, main = 'Quantidade de casos por cidade', xlab = 'Cidades', ylab = 'Casos')
 
-sum(ndsa$casos[c(1:50)])
+sum(ndsa$casos[c(1:100)])
 sum(ndsa$casos)
 
 
-porcentagem <- (sum(ndsa$casos[c(1:50)])*100)/sum(ndsa$casos)
+porcentagem <- (sum(ndsa$casos[c(1:100)])*100)/sum(ndsa$casos)
+
+library(qcc)
+
+pareto.chart(ndsa$casos)
