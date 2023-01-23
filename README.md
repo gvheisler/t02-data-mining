@@ -9,3 +9,5 @@ Em um ambiente com muitos dados precisamos de maneiras eficazes de descobrir inf
 ![Casos por dia](/graficos/imagens/casosDiaPlot.png "Casos por dia")
 ### Óbitos por COVID-19 por dia
 ![Óbitos por dia](/graficos/imagens/obitosDiaPlot.png "Óbitos por dia")
+### Mudança nos sintomas
+![Porcentagem de sintomas nos casos de COVID-19](/sintomas.png "Porcentagem de sintomas")
